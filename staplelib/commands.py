@@ -90,6 +90,7 @@ def select(args, inverse=False):
 
     if not filesandranges or not outputfilename:
         raise CommandError("Both input and output filenames are required.")
+    iohelper.check_output_file(outputfilename)
 
     output = PdfFileWriter()
     try:
@@ -140,7 +141,7 @@ def delete(args):
 def split(args):
     """Burst an input file into one file per page."""
 
-    files = args
+    files = iohelper.expand_input_files(args)
     verbose = staplelib.OPTIONS.verbose
 
     if not files:
@@ -186,7 +187,7 @@ def split(args):
 
 def info(args):
     """Display Metadata content for all input files."""
-    files = args
+    files = iohelper.expand_input_files(args)
 
     if not files:
         raise CommandError("No input files specified.")
