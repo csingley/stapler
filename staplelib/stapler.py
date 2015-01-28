@@ -62,7 +62,7 @@ def main():
         print_error("cannot find output directory named {}".format(
                     staplelib.OPTIONS.destdir))
 
-    if (len(args) < 2):
+    if len(args) < 2:
         print_error("Not enough arguments", show_usage=True)
 
     modes = {
@@ -72,21 +72,21 @@ def main():
         "burst": commands.split,
         "del": commands.delete,
         "info": commands.info,
-        "zip": commands.zip,
+        "zip": commands.zip_pdfs,
     }
 
     mode = args[0]
     args = args[1:]
-    if not mode in modes:
+    if mode not in modes:
         print_error('Please enter a valid mode', show_usage=True)
 
     if staplelib.OPTIONS.verbose:
-        print "Mode: %s" % mode
+        print("Mode: %s" % mode)
 
     # dispatch call to known subcommand
     try:
         modes[mode](args)
-    except CommandError, e:
+    except CommandError as e:
         print_error(e)
 
 

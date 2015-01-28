@@ -4,9 +4,9 @@ class CommandError(Exception):
     """
     pass
 
-OPTIONS = None # optparse options
+OPTIONS = None  # optparse options
 
 
 def main():
-    import stapler
+    from . import stapler
     stapler.main()

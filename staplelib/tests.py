@@ -6,7 +6,7 @@ from subprocess import check_call
 import tempfile
 import unittest
 
-from pyPdf import PdfFileReader
+from PyPDF2 import PdfFileReader
 
 
 HERE = os.path.abspath(os.path.dirname(__file__))
@@ -33,7 +33,7 @@ class TestStapler(unittest.TestCase):
         check_call([STAPLER, 'cat', ONEPAGE_PDF, FIVEPAGE_PDF,
                     self.outputfile])
         self.assert_(os.path.isfile(self.outputfile))
-        pdf = PdfFileReader(file(self.outputfile, 'rb'))
+        pdf = PdfFileReader(open(self.outputfile, 'rb'))
         self.assertEqual(pdf.getNumPages(), 6)
 
     def test_split(self):
@@ -43,7 +43,7 @@ class TestStapler(unittest.TestCase):
         filelist = os.listdir(self.tmpdir)
         self.assertEqual(len(filelist), 5)
         for f in os.listdir(self.tmpdir):
-            pdf = PdfFileReader(file(os.path.join(self.tmpdir, f), 'rb'))
+            pdf = PdfFileReader(open(os.path.join(self.tmpdir, f), 'rb'))
             self.assertEqual(pdf.getNumPages(), 1)
 
 
