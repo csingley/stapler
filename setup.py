@@ -6,6 +6,7 @@ setup(name='stapler',
     description="Manipulate PDF documents from the command line",
     classifiers=[
         "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 3",
         "Topic :: Utilities",
     ],
     keywords='pdf stapler cli',
@@ -17,7 +18,7 @@ setup(name='stapler',
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'PyPDF2',
+        'PyPDF2 == 1.24',
     ],
     entry_points="""
     [console_scripts]

@@ -5,7 +5,7 @@ import os.path
 import re
 import sys
 
-from PyPDF2 import PdfFileWriter, PdfFileReader
+from PyPDF2 import PdfFileReader
 
 from . import CommandError
 import staplelib
@@ -25,7 +25,7 @@ def read_pdf(filename):
     """Open a PDF file with PyPDF2."""
     if not os.path.exists(filename):
         raise CommandError("{} does not exist".format(filename))
-    pdf = PdfFileReader(file(filename, "rb"))
+    pdf = PdfFileReader(open(filename, "rb"))
     if pdf.isEncrypted:
         while True:
             pw = prompt_for_pw(filename)
@@ -33,7 +33,7 @@ def read_pdf(filename):
             if matched:
                 break
             else:
-                print "The password did not match."
+                print("The password did not match.")
     return pdf
 
 
@@ -47,15 +47,15 @@ def write_pdf(pdf, filename):
         if opt.ownerpw or opt.userpw:
             pdf.encrypt(opt.userpw or '', opt.ownerpw)
 
-    outputStream = file(filename, "wb")
-    pdf.write(outputStream)
-    outputStream.close()
+    output_stream = open(filename, "wb")
+    pdf.write(output_stream)
+    output_stream.close()
 
 
 def prompt_for_pw(filename):
     """Prompt the user for the password to access an input file."""
-    print 'Please enter a password to decrypt {}.'.format(filename)
-    print '(The password will not be shown. Press ^C to cancel).'
+    print('Please enter a password to decrypt {}.'.format(filename))
+    print('(The password will not be shown. Press ^C to cancel).')
 
     try:
         return getpass.getpass('--> ')
@@ -90,7 +90,7 @@ def parse_ranges(files_and_ranges):
                                "pages": []})
         else:
             match = re.match('([0-9]+|end)(?:-([0-9]+|end))?([LRD]?)',
-                                inputname)
+                             inputname)
             if not match:
                 raise CommandError('Invalid range: {}'.format(inputname))
 
