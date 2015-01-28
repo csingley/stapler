@@ -193,12 +193,12 @@ def info(args):
 
     for f in files:
         pdf = iohelper.read_pdf(f)
-        print "*** Metadata for {}".format(f)
-        print
-        info = pdf.documentInfo
-        if info:
-            for name, value in info.items():
-                print u"    {}:  {}".format(name, value)
+        print("*** Metadata for {}".format(f))
+        print()
+        doc_info = pdf.documentInfo
+        if doc_info:
+            for name, value in doc_info.items():
+                print(u"    {}:  {}".format(name, value))
         else:
             print("    (No metadata found.)")
         print()
