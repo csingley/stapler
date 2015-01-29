@@ -1,5 +1,6 @@
 """Module containing the actual commands stapler understands."""
 
+from __future__ import print_function
 import math
 import os
 import itertools

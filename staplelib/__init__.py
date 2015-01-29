@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 class CommandError(Exception):
     """
     Exception class indicating a problem while executing a stapler command.

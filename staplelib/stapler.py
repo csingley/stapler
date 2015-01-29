@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 """Main stapler dispatcher."""
 
+from __future__ import print_function
 from optparse import OptionParser
 import os
 import sys
 
 from . import commands, CommandError
 import staplelib
-
 
 USAGE = """
 usage: %prog [options] mode input.pdf ... [output.pdf]

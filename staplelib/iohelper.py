@@ -1,5 +1,6 @@
 """Helper functions for user-supplied arguments and file I/O."""
 
+from __future__ import print_function
 import getpass
 import glob
 import os.path
