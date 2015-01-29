@@ -35,7 +35,7 @@ def zip_pdfs(args):
     verbose = staplelib.OPTIONS.verbose
 
     if not filesandranges or not outputfilename:
-        raise CommandError("Both input and output filenames are required.")
+        raise CommandError('Both input and output filenames are required.')
 
     try:
         filestozip = []
@@ -53,13 +53,13 @@ def zip_pdfs(args):
             for pageno, rotate in pagerange:
                 if 1 <= pageno <= pdf.getNumPages():
                     if verbose:
-                        print("Using page: {} (rotation: {} deg.)".format(
+                        print('Using page: {} (rotation: {} deg.)'.format(
                             pageno, rotate))
 
                     pagestozip.append(pdf.getPage(pageno-1)
                                       .rotateClockwise(rotate))
                 else:
-                    raise CommandError("Page {} not found in {}.".format(
+                    raise CommandError('Page {} not found in {}.'.format(
                         pageno, input_args['name']))
             filestozip.append(pagestozip)
 
@@ -90,7 +90,7 @@ def select(args, inverse=False):
     verbose = staplelib.OPTIONS.verbose
 
     if not filesandranges or not outputfilename:
-        raise CommandError("Both input and output filenames are required.")
+        raise CommandError('Both input and output filenames are required.')
     iohelper.check_output_file(outputfilename)
 
     output = PdfFileWriter()
@@ -114,13 +114,13 @@ def select(args, inverse=False):
             for pageno, rotate in pagerange:
                 if 1 <= pageno <= pdf.getNumPages():
                     if verbose:
-                        print("Using page: {} (rotation: {} deg.)".format(
+                        print('Using page: {} (rotation: {} deg.)'.format(
                             pageno, rotate))
 
                     output.addPage(pdf.getPage(pageno-1)
                                    .rotateClockwise(rotate))
                 else:
-                    raise CommandError("Page {} not found in {}.".format(
+                    raise CommandError('Page {} not found in {}.'.format(
                         pageno, input_args['name']))
 
     except Exception as e:
@@ -146,7 +146,7 @@ def split(args):
     verbose = staplelib.OPTIONS.verbose
 
     if not files:
-        raise CommandError("No input files specified.")
+        raise CommandError('No input files specified.')
 
     inputs = []
     try:
@@ -182,7 +182,7 @@ def split(args):
         filecount += 1
 
     if verbose:
-        print("\n{} page(s) in {} file(s) processed.".format(
+        print('\n{} page(s) in {} file(s) processed.'.format(
             pagecount, filecount))
 
 
@@ -191,16 +191,16 @@ def info(args):
     files = iohelper.expand_input_files(args)
 
     if not files:
-        raise CommandError("No input files specified.")
+        raise CommandError('No input files specified.')
 
     for f in files:
         pdf = iohelper.read_pdf(f)
-        print("*** Metadata for {}".format(f))
+        print('*** Metadata for {}'.format(f))
         print()
         doc_info = pdf.documentInfo
         if doc_info:
             for name, value in doc_info.items():
                 print(u"    {}:  {}".format(name, value))
         else:
-            print("    (No metadata found.)")
+            print('    (No metadata found.)')
         print()

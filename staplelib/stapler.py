@@ -47,8 +47,8 @@ parser.add_option('-u', '--userpw', action='store', dest='userpw',
                   default=None)
 parser.add_option('-v', '--verbose', action='store_true', dest='verbose',
                   default=False)
-parser.add_option('-d', '--destdir', dest="destdir", default="." + os.sep,
-                  help="directory where to store output file",)
+parser.add_option('-d', '--destdir', dest='destdir', default='.' + os.sep,
+                  help='directory where to store output file',)
 
 
 def main():
@@ -59,20 +59,20 @@ def main():
     (staplelib.OPTIONS, args) = parser.parse_args()
 
     if not os.path.exists(staplelib.OPTIONS.destdir):
-        print_error("cannot find output directory named {}".format(
+        print_error('cannot find output directory named {}'.format(
                     staplelib.OPTIONS.destdir))
 
     if len(args) < 2:
-        print_error("Not enough arguments", show_usage=True)
+        print_error('Not enough arguments', show_usage=True)
 
     modes = {
-        "cat": commands.select,
-        "sel": commands.select,
-        "split": commands.split,
-        "burst": commands.split,
-        "del": commands.delete,
-        "info": commands.info,
-        "zip": commands.zip_pdfs,
+        'cat': commands.select,
+        'sel': commands.select,
+        'split': commands.split,
+        'burst': commands.split,
+        'del': commands.delete,
+        'info': commands.info,
+        'zip': commands.zip_pdfs,
     }
 
     mode = args[0]
@@ -81,7 +81,7 @@ def main():
         print_error('Please enter a valid mode', show_usage=True)
 
     if staplelib.OPTIONS.verbose:
-        print("Mode: %s" % mode)
+        print('Mode: %s' % mode)
 
     # dispatch call to known subcommand
     try:
@@ -95,6 +95,6 @@ def print_error(msg, code=1, show_usage=False):
     sys.stderr.write(str('Error: {}\n'.format(msg)))
 
     if show_usage:
-        sys.stderr.write("\n{}\n".format(parser.get_usage()))
+        sys.stderr.write('\n{}\n'.format(parser.get_usage()))
 
     sys.exit(code)

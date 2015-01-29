@@ -26,8 +26,8 @@ ROTATIONS = {'u': ROTATION_NONE,
 def read_pdf(filename):
     """Open a PDF file with PyPDF2."""
     if not os.path.exists(filename):
-        raise CommandError("{} does not exist".format(filename))
-    pdf = PdfFileReader(open(filename, "rb"))
+        raise CommandError('{} does not exist'.format(filename))
+    pdf = PdfFileReader(open(filename, 'rb'))
     if pdf.isEncrypted:
         while True:
             pw = prompt_for_pw(filename)
@@ -35,21 +35,21 @@ def read_pdf(filename):
             if matched:
                 break
             else:
-                print("The password did not match.")
+                print('The password did not match.')
     return pdf
 
 
 def write_pdf(pdf, filename):
     """Write the content of a PdfFileWriter object to a file."""
     if os.path.exists(filename):
-        raise CommandError("File already exists: {}".format(filename))
+        raise CommandError('File already exists: {}'.format(filename))
 
     opt = staplelib.OPTIONS
     if opt:
         if opt.ownerpw or opt.userpw:
             pdf.encrypt(opt.userpw or '', opt.ownerpw)
 
-    output_stream = open(filename, "wb")
+    output_stream = open(filename, 'wb')
     pdf.write(output_stream)
     output_stream.close()
 
@@ -76,7 +76,7 @@ def expand_input_files(arglist):
 
     for filename in files:
         if not os.path.exists(filename):
-            raise CommandError("{} does not exist".format(filename))
+            raise CommandError('{} does not exist'.format(filename))
 
     return files
 
@@ -96,9 +96,9 @@ def parse_ranges(files_and_ranges):
         if inputname.lower().endswith('.pdf'):
             filenames = expand_input_files((inputname,))  # Expand expects arg tuple.
             for filename in filenames:
-                operations.append({"name": filename,
-                                   "pdf": read_pdf(filename),
-                                   "pages": []})
+                operations.append({'name': filename,
+                                   'pdf': read_pdf(filename),
+                                   'pages': []})
         else:
             match = re.match('([0-9]+|end)(?:-([0-9]+|end))?([LRD]?)',
                              inputname)
@@ -117,8 +117,8 @@ def parse_ranges(files_and_ranges):
 
             if begin > max_page or end > max_page:
                 raise CommandError(
-                    "Range {}-{} exceeds maximum page number "
-                    "{} of file {}".format(
+                    'Range {}-{} exceeds maximum page number '
+                    '{} of file {}'.format(
                         begin, end, max_page, current['name']))
 
             # negative ranges sort pages backwards
