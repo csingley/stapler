@@ -1,41 +1,53 @@
-Stapler
-=======
+# Stapler #
 
 Stapler is a pure Python alternative to [PDFtk][pdftk], a tool for manipulating
 PDF documents from the command line.
 
 [pdftk]: http://www.pdfhacks.com/pdftk/
 
-History
--------
+
+## History ##
+
 PDFtk was written in Java and C++, and
 is natively compiled with gcj. Sadly, it has been discontinued a few years ago
 and bitrot is setting in (e.g., it does not compile easily on a number of
 platforms).
 
-Philip Stark decided to look for an alternative and found pypdf, a PDF library
-written in pure Python. He couldn't find a tool which actually used the
-library, so he started writing his own.
-
-This version of stapler is Fred Wenzel's fork of the project, with a completely
-refactored source code, tests, and added functionality.
-
 Like pdftk, stapler is a command-line tool. If you would like to add a GUI,
 compile it into a binary for your favorite platform, or contribute anything else,
 feel free to fork and send me a pull request.
 
-License
--------
-Stapler version 0.2 was written in 2009 by Philip Stark.
-Stapler version 0.3 was written in 2010 by Fred Wenzel.
+
+## Changelog (sort of)
+
+Stapler version 0.2 (2009) by Philip Stark
+
+- Basic functionality
+- cat, select, split
+
+Stapler version 0.3 (2010) by Fred Wenzel
+
+- Major refactoring
+- added functionality (#TODO)
+
+Stapler version 0.4 (2014) by Fred Wenzel
+
+- Port to PyPDF2
+- custom globbing
+
+
+## Contributors and License ##
+
+Big Thanks to Fred Wenzel for the big refactor for more scalability.
 
 For a list of contributors, check the ``CONTRIBUTORS`` file.
 
 Stapler is distributed under a BSD license. A copy of the BSD Style
 License used can be found in the file ``LICENSE``.
 
-Usage
------
+
+## Usage ##
+
 There are the following modes in Stapler:
 
 ### select/delete (called with ``sel`` and ``del``, respectively)
