@@ -29,7 +29,7 @@ def read_pdf(filename):
     """Open a PDF file with PyPDF2."""
     if not os.path.exists(filename):
         raise CommandError("{} does not exist".format(filename))
-    pdf = PdfFileReader(file(filename, "rb"))
+    pdf = PdfFileReader(open(filename, "rb"))
     if pdf.isEncrypted:
         while True:
             pw = prompt_for_pw(filename)
@@ -37,7 +37,7 @@ def read_pdf(filename):
             if matched:
                 break
             else:
-                print "The password did not match."
+                print("The password did not match.")
     return pdf
 
 
@@ -51,15 +51,15 @@ def write_pdf(pdf, filename):
         if opt.ownerpw or opt.userpw:
             pdf.encrypt(opt.userpw or '', opt.ownerpw)
 
-    outputStream = file(filename, "wb")
+    outputStream = open(filename, "wb")
     pdf.write(outputStream)
     outputStream.close()
 
 
 def prompt_for_pw(filename):
     """Prompt the user for the password to access an input file."""
-    print 'Please enter a password to decrypt {}.'.format(filename)
-    print '(The password will not be shown. Press ^C to cancel).'
+    print('Please enter a password to decrypt {}.'.format(filename))
+    print('(The password will not be shown. Press ^C to cancel).')
 
     try:
         return getpass.getpass('--> ')
@@ -116,9 +116,9 @@ def parse_ranges(files_and_ranges):
 
             # negative ranges sort pages backwards
             if begin < end:
-                pagerange = range(begin, end + 1)
+                pagerange = list(range(begin, end + 1))
             else:
-                pagerange = range(end, begin + 1)[::-1]
+                pagerange = list(range(end, begin + 1))[::-1]
 
             for p in pagerange:
                 current['pages'].append((p, rotate))
